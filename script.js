@@ -6,15 +6,17 @@ let BtnParar = document.getElementById("parar");
 
 let BtnResetar = document.getElementById("resetar");
 
-let tempoRestante = 5;
+let tempoRestante = 1500;
 
-let ciclos = 3;
+let ciclos = 0;
 
 let modo = "foco"; //foco (1500), longo(900), descanso(300)
 
 let rodando = false;
 
 let intervalo = null;
+
+let audioCtx = new AudioContext();
 
 function Iniciar(){
     BtnIniciar.textContent = "Iniciar";
@@ -44,6 +46,7 @@ function Iniciar(){
                 else if (modo == "descanso" || modo == "longo"){
                     modo = "foco";
                 }
+                tocarSom();
                 Resetar();
                 Iniciar();
             };
@@ -76,6 +79,17 @@ function Resetar(){
     }
 
     atualizarDisplay();
+};
+
+async function tocarSom(){
+    let oscillator = audioCtx.createOscillator();
+    await audioCtx.resume();
+    oscillator.frequency.value = 800;
+    oscillator.type = "sine";
+    oscillator.connect(audioCtx.destination);
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 0.2);
+    
 };
 
 function atualizarDisplay(){
