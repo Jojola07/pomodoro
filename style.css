@@ -68,3 +68,9 @@ h1 {
     color: rgb(202, 202, 202);
     transform: translateY(-5px);
 }
+
+.fundo-botoes button:focus {
+    background: #5e5e5e;
+    color: rgb(202, 202, 202);
+    transform: translateY(-5px);
+}
